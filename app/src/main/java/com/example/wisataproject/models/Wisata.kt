@@ -10,5 +10,4 @@ data class Wisata(
     @SerializedName("name") var name : String? = null,
     @SerializedName("location") var location: String? = null,
     @SerializedName("description") var description : String? = null,
-    @SerializedName("user_id") var user_id : String? = null
 ): Parcelable

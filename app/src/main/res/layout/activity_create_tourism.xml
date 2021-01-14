@@ -30,22 +30,6 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
-            android:id="@+id/inUser"
-            android:layout_height="wrap_content"
-            android:hint="ID USER"
-            app:errorEnabled="true"
-            app:boxStrokeColor="@color/teal_200"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:id="@+id/etUser"
-                android:layout_height="wrap_content"
-                android:maxLines="1"/>
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
             android:id="@+id/inName"
             android:layout_height="wrap_content"
             android:hint="Name"

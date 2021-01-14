@@ -3,6 +3,7 @@ package com.example.wisataproject
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.WindowAnimationFrameStats
 import android.widget.Toast
 import com.example.wisataproject.contracts.WisataActiviyContract
 import com.example.wisataproject.presenters.CreateActivityPresenter
@@ -15,29 +16,24 @@ class CreateTourismActivity : AppCompatActivity(), WisataActiviyContract.ViewCre
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_tourism)
         presenter = CreateActivityPresenter(this)
-        getUserId()
         Save()
     }
 
     private fun Save(){
         btnSave.setOnClickListener{
+            val token = WisataUtils.getToken(this)
             val name = etName.text.toString().trim()
             val location  = etLocation.text.toString().trim()
             val description = etDescription.text.toString().trim()
-            val user_id = etUser.text?.toString().trim()
 
             if(name.isNotEmpty() && location.isNotEmpty() && description.isNotEmpty()){
-                presenter.save(name, location, description,user_id)
+                token?.let { it1 -> presenter.save(it1, name, location, description) }
             }else{
                 toast("Isi Semua form")
             }
         }
     }
 
-    private fun getUserId(){
-        val user_id = WisataUtils.getUserId(this);
-        etUser.setText(user_id)
-    }
 
     override fun success(message: String?) {
         startActivity(Intent(this, MainActivity::class.java))
@@ -51,6 +47,4 @@ class CreateTourismActivity : AppCompatActivity(), WisataActiviyContract.ViewCre
     override fun isLoading(state: Boolean) {
         btnSave.isEnabled = !state
     }
-
-
 }

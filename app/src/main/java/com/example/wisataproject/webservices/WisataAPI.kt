@@ -9,7 +9,6 @@ import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.*
-import java.io.FileDescriptor
 import java.util.concurrent.TimeUnit
 
 class WisataAPI {
@@ -23,7 +22,9 @@ class WisataAPI {
 
         private fun getClient(): Retrofit {
             return if(retrofit == null){
-                retrofit = Retrofit.Builder().baseUrl(WisataUtils.API_ENDPOINT).client(okHttpClient).addConverterFactory(GsonConverterFactory.create()).build()
+                retrofit = Retrofit.Builder().baseUrl(WisataUtils.API_ENDPOINT)
+                    .client(okHttpClient)
+                    .addConverterFactory(GsonConverterFactory.create()).build()
                 retrofit!!
             }else{
                 retrofit!!
@@ -45,12 +46,11 @@ interface WisataAPIService {
 
     @FormUrlEncoded
     @POST("tourism")
-    fun save(
-        @Header("x-access-token") token: String,
+    fun createData(
+        @Header("x-access-token") token :String,
         @Field("name") name: String? = null,
         @Field("location") location: String? = null,
-        @Field("description") description: String? = null,
-        @Field("user_id") user_id : Int? = null
+        @Field("description") description: String? = null
     ): Call<WrappedResponse<Wisata>>
 }
 

@@ -11,12 +11,12 @@ import retrofit2.Response
 class CreateActivityPresenter(v: WisataActiviyContract.ViewCreate): WisataActiviyContract.InteractionPost {
     private var view : WisataActiviyContract.ViewCreate? = v
     private var api = WisataAPI.instance()
-    override fun validate(name: String, location: String, description: String, user_id: Int): Boolean {
+    override fun validate(name: String, location: String, description: String): Boolean {
         return true
     }
 
-    override fun save(name: String, location: String, description: String, user_id: Int) {
-        api.save(name, location,description).enqueue(object: Callback<WrappedResponse<Wisata>>{
+    override fun save(token:String, name: String, location: String, description: String) {
+        api.createData(token,name, location, description).enqueue(object: Callback<WrappedResponse<Wisata>>{
             override fun onFailure(call: Call<WrappedResponse<Wisata>>, t: Throwable) {
                 view?.toast("Koneksi tidak bisa")
             }
@@ -27,9 +27,11 @@ class CreateActivityPresenter(v: WisataActiviyContract.ViewCreate): WisataActivi
             ) {
                 if(response.isSuccessful){
                     val body = response.body()
-                    if(body != null && body.status == false){
-                        view?.toast("Berhasil")
+                    if(body != null && body.status){
+                        println("body "+ body)
+                        view?.success("Berhasil")
                     }
+
                 }else{
                     view?.toast("Ada yang tidak beres, coba lagi nanti, atau hubungi admin")
                 }

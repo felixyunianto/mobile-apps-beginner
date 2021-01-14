@@ -1,5 +1,6 @@
 package com.example.wisataproject.contracts
 
+import android.text.Editable
 import com.example.wisataproject.models.Wisata
 
 interface WisataActiviyContract {
@@ -22,8 +23,8 @@ interface WisataActiviyContract {
     }
 
     interface InteractionPost{
-        fun validate(name: String, location: String, description: String,user_id: Int) : Boolean
-        fun save(name: String, location: String, description: String, user_id: Int)
+        fun validate(name: String, location: String, description: String) : Boolean
+        fun save(token:String, name: String, location: String, description: String)
         fun destroy()
     }
 
