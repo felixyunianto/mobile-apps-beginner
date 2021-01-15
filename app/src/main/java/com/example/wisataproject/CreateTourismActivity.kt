@@ -3,13 +3,15 @@ package com.example.wisataproject
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.WindowAnimationFrameStats
+import android.os.Handler
 import android.widget.Toast
+import cn.pedant.SweetAlert.SweetAlertDialog
 import com.example.wisataproject.contracts.WisataActiviyContract
 import com.example.wisataproject.presenters.CreateActivityPresenter
 import com.example.wisataproject.utilities.WisataUtils
 import kotlinx.android.synthetic.main.activity_create_tourism.*
 
+@Suppress("DEPRECATION")
 class CreateTourismActivity : AppCompatActivity(), WisataActiviyContract.ViewCreate {
     private var presenter = CreateActivityPresenter(this)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -18,7 +20,6 @@ class CreateTourismActivity : AppCompatActivity(), WisataActiviyContract.ViewCre
         presenter = CreateActivityPresenter(this)
         Save()
     }
-
     private fun Save(){
         btnSave.setOnClickListener{
             val token = WisataUtils.getToken(this)
@@ -27,17 +28,21 @@ class CreateTourismActivity : AppCompatActivity(), WisataActiviyContract.ViewCre
             val description = etDescription.text.toString().trim()
 
             if(name.isNotEmpty() && location.isNotEmpty() && description.isNotEmpty()){
-                token?.let { it1 -> presenter.save(it1, name, location, description) }
+                token?.let { it -> presenter.save(it, name, location, description) }
             }else{
                 toast("Isi Semua form")
             }
         }
     }
 
-
     override fun success(message: String?) {
-        startActivity(Intent(this, MainActivity::class.java))
-            .also { finish() }
+        SweetAlertDialog(this,SweetAlertDialog.SUCCESS_TYPE)
+            .setTitleText("Data Di Tambahkan")
+            .show()
+        Handler().postDelayed({
+            startActivity(Intent(this, SettingActivity::class.java))
+            finish()
+        },1000)
     }
 
     override fun toast(message: String?) {

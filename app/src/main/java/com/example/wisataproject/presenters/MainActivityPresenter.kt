@@ -1,6 +1,5 @@
 package com.example.wisataproject.presenters
 
-import com.example.wisataproject.MainActivity
 import com.example.wisataproject.contracts.WisataActiviyContract
 import com.example.wisataproject.models.Wisata
 import com.example.wisataproject.webservices.WisataAPI

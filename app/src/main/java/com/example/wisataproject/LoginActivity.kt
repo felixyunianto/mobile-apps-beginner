@@ -38,7 +38,7 @@ class LoginActivity : AppCompatActivity(), LoginActivityContract.View {
 
     override fun success(token: String, user_id: String) {
         WisataUtils.setToken(this, token, user_id)
-        startActivity(Intent(this, MainActivity::class.java))
+        startActivity(Intent(this, DashboardActivity::class.java))
             .also{
                 finish()
             }
@@ -64,8 +64,7 @@ class LoginActivity : AppCompatActivity(), LoginActivityContract.View {
     private fun isLoggedIn(){
         val token = WisataUtils.getToken(this)
         if(token != null){
-            startActivity(Intent(this, MainActivity::class.java)).also { finish() }
+            startActivity(Intent(this, DashboardActivity::class.java)).also { finish() }
         }
     }
-
 }

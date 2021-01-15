@@ -44,5 +44,4 @@ class CreateActivityPresenter(v: WisataActiviyContract.ViewCreate): WisataActivi
         view = null
     }
 
-
 }
