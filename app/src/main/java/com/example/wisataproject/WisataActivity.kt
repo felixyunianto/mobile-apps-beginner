@@ -20,15 +20,7 @@ class WisataActivity : AppCompatActivity(), WisataActiviyContract.View {
         setContentView(R.layout.activity_main)
         checkIsLoggedIn()
         presenter = MainActivityPresenter(this)
-//        Logout()
-//        intentCreate()
     }
-
-//    private fun intentCreate(){
-//        btnCreate.setOnClickListener{
-//            startActivity(Intent(this, CreateTourismActivity::class.java)).also { finish() }
-//        }
-//    }
 
     private fun getData (){
         WisataUtils.getToken(this)?.let { presenter?.allUser(it) }

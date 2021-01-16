@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.WisataProject">
-        <activity android:name=".SettingActivity"></activity>
+        <activity android:name=".UpdateActivity"></activity>
+        <activity android:name=".SettingActivity" />
         <activity android:name=".DetailActivity" />
         <activity android:name=".DashboardActivity" />
         <activity android:name=".CreateTourismActivity" />
